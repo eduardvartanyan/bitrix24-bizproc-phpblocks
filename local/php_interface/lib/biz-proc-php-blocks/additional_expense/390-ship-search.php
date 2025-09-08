@@ -10,10 +10,6 @@ try {
     Loader::includeModule('crm');
 } catch (LoaderException $e) { return; }
 
-try {
-    Loader::includeModule('crm');
-} catch (LoaderException $e) { return; }
-
 $analStr = '{{Аналитика}}';
 
 $shipId = '';
