@@ -13,32 +13,19 @@ try {
 $analStr = '{{Аналитика}}';
 
 $shipId = '';
+$arFilter = ['IBLOCK_ID' => 20];
 if (strpos($analStr, 'S_') !== false) {
     $dealId = str_replace('S_', '', $analStr);
-    $obDealPositions = CIBlockElement::GetList(
-        [],
-        ['IBLOCK_ID' => 20, 'PROPERTY_ZAKAZ_KLIENTA' => $dealId],
-        false,
-        false,
-        ['PROPERTY_DOSTAVKA']
-    );
-    while ($pos = $obDealPositions->fetch()) {
-        if ($shipId) { break; }
-        $shipId = $pos['PROPERTY_DOSTAVKA_VALUE'];
-    }
+    $arFilter['PROPERTY_ZAKAZ_KLIENTA'] = $dealId;
 } else {
     $ptuId = $analStr;
-    $obDealPositions = CIBlockElement::GetList(
-        [],
-        ['IBLOCK_ID' => 20, 'PROPERTY_PRIOBRETENIE' => $ptuId],
-        false,
-        false,
-        ['PROPERTY_DOSTAVKA']
-    );
-    while ($pos = $obDealPositions->fetch()) {
-        if ($shipId) { break; }
-        $shipId = $pos['PROPERTY_DOSTAVKA_VALUE'];
-    }
+    $arFilter['PROPERTY_PRIOBRETENIE'] = $ptuId;
+}
+
+$obDealPositions = CIBlockElement::GetList([], $arFilter, false, false, ['PROPERTY_DOSTAVKA']);
+while ($pos = $obDealPositions->fetch()) {
+    if ($shipId) { break; }
+    $shipId = $pos['PROPERTY_DOSTAVKA_VALUE'];
 }
 
 if ($shipId) {
