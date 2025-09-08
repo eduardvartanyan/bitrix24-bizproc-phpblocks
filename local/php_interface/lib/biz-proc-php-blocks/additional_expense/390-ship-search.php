@@ -14,7 +14,7 @@ try {
     Loader::includeModule('crm');
 } catch (LoaderException $e) { return; }
 
-$analStr = 'S_3964';
+$analStr = '{{Аналитика}}';
 
 $shipId = '';
 if (strpos($analStr, 'S_') !== false) {
