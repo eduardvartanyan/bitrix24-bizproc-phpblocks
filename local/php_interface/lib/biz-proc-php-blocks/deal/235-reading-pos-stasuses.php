@@ -16,7 +16,7 @@ $factory = $instance->getFactory(162);
 
 $obPositions = CIBlockElement::GetList(
     [],
-    ['IBLOCK_ID' => 20, 'PROPERTY_ZAKAZ_KLIENTA' => 3966],
+    ['IBLOCK_ID' => 20, 'PROPERTY_ZAKAZ_KLIENTA' => '{{ID}}'],
     false,
     false,
     ['PROPERTY_STATUS', 'PROPERTY_ZAKAZ_POSTAVSHCHIKU','PROPERTY_PRIOBRETENIE', 'PROPERTY_PRODAZHA',
@@ -36,7 +36,7 @@ while ($arPosition = $obPositions->fetch()) {
     }
 
     if (!(
-        ($arPosition['PROPERTY_STATUS_VALUE'] == '✅ У заказчика' && $arPosition['PROPERTY_PRODAZHA_VALUE'] == 1)
+        ($arPosition['PROPERTY_STATUS_VALUE'] == '{{Константы глобальные: Статус успешной отгрузки товара}}' && $arPosition['PROPERTY_PRODAZHA_VALUE'] == 1)
         || ($arPosition['PROPERTY_PRIOBRETENIE_VALUE'] != '' && $arPosition['PROPERTY_PRODAZHA_VALUE'] == 0)
         || $orderStage == 'DT162_7:UC_ZAY9F3'
     )) {
