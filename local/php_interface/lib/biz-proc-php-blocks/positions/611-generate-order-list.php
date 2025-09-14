@@ -11,10 +11,12 @@ try {
     Loader::includeModule('crm');
 } catch (LoaderException $e) { return; }
 
+const DOMAIN = 'https://crm.a9systems.ru';
+
 $instance = Container::getInstance();
 $factory = $instance->getFactory(162);
 
-$id       = '{{ID элемента}}';
+$posId    = '{{ID элемента}}';
 $html     = '';
 $orderQty = 0;
 
@@ -30,7 +32,7 @@ foreach (json_decode('{{JSON}}', true) as $id => $orderItem) {
             $title = $rsItem->getData()['TITLE'];
         }
 
-        $html .= '<a href="https://ipvartanyan.ru/page/zakazy_postavshchiku/zakaz_postavshchiku/type/162/details/' . $id . '/"';
+        $html .= '<a href="' . DOMAIN . '/page/zakazy_postavshchiku/zakaz_postavshchiku/type/162/details/' . $id . '/"';
         if ($orderItem['Q'] > $deliveryQty) {
             $html .= ' style="background: #fdfdae;"';
         }
@@ -40,5 +42,5 @@ foreach (json_decode('{{JSON}}', true) as $id => $orderItem) {
     }
 }
 
-CIBlockElement::SetPropertyValues($id, 20, $html, 'ORDER_HTML');
-CIBlockElement::SetPropertyValues($id, 20, $orderQty, 'ZAKAZANO_U_POSTAVSHCHIKA');
+CIBlockElement::SetPropertyValues($posId, 20, $html, 'ORDER_HTML');
+CIBlockElement::SetPropertyValues($posId, 20, $orderQty, 'ZAKAZANO_U_POSTAVSHCHIKA');
