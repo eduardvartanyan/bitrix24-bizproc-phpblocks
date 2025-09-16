@@ -21,7 +21,7 @@ $positionsData = CIBlockElement::GetList(
 while ($arElement = $positionsData->fetch()) {
     $array = json_decode($arElement['PROPERTY_JSON_VALUE'], true);
 
-    if (array_key_exists($orderId, $array)) {
+    if (is_array($array) && array_key_exists($orderId, $array)) {
         $shipQuantity = 0;
         foreach ($array[$orderId]['D'] as $item) {
             $shipQuantity += $item['Q'];

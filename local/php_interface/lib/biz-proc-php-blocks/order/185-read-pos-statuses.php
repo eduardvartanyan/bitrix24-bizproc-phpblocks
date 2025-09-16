@@ -7,7 +7,7 @@ $orderId = '{{ID}}';
 
 $rsData = CIBlockElement::GetList(
     [],
-    ['IBLOCK_ID' => 20, 'PROPERTY_ZAKAZ_POSTAVSHCHIKU' => $orderId],
+    ['IBLOCK_ID' => 20, 'PROPERTY_ZAKAZ_POSTAVSHCHIKU' => $orderId, '!PROPERTY_JSON' => false],
     false,
     false,
     ['PROPERTY_OTGRUZHENO', 'PROPERTY_JSON']
@@ -17,7 +17,7 @@ $hasAvailablePosition = 0;
 while ($arItem = $rsData->fetch()) {
     $array = json_decode($arItem['PROPERTY_JSON_VALUE'], true);
 
-    if (array_key_exists($orderId, $array)) {
+    if (is_array($array) && array_key_exists($orderId, $array)) {
         $shipQty = 0;
         foreach ($array[$orderId]['D'] as $item) {
             $shipQty += $item['Q'];
