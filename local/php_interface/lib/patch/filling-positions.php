@@ -12,7 +12,7 @@ try {
     Loader::includeModule('crm');
 } catch (LoaderException $e) { return; }
 
-const DOMAIN = 'https://ipvartanyan.ru';
+const DOMAIN = 'https://crm.a9systems.ru/';
 
 $instance     = Container::getInstance();
 $orderFactory = $instance->getFactory(162);
