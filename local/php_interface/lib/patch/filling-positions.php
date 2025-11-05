@@ -60,6 +60,7 @@ while ($pos = $obPositions->Fetch()) {
             ];
         }
         $json = json_encode($array);
+        unset($array);
         CIBlockElement::SetPropertyValues($id, 20, $json, 'JSON');
     }
 
@@ -78,7 +79,7 @@ while ($pos = $obPositions->Fetch()) {
             if ($ship = $obShip->getData()) {
                 $html = '<a href="' . DOMAIN . '/page/dostavki/dostavka/type/149/details/' .
                     $ship['ID'] . '/">' . $ship['TITLE'] . '</a> (ID ' . $ship['ID'] . ') - ' . $qty . '<br>';
-                CIBlockElement::SetPropertyValues($id, 20, $html, 'PROPERTY_DELIVERY_HTML');
+                CIBlockElement::SetPropertyValues($id, 20, $html, 'DELIVERY_HTML');
             }
         }
     }
